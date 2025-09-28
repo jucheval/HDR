@@ -10,7 +10,7 @@ begin # Parameters
     srde = StochasticRDE(
         n=Inf,
         refractoryperiod=1.0,
-        decayrate=50.0,
+        decayrate=10.0,
         firingrate=φ
     )
 end
@@ -29,8 +29,8 @@ begin # initial condition
     u₀(a) = pdf(Exponential(), a - 1.)
 end
 
-begin # Simulation and plot of the activity
-    ts, sol = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts))
-    activity = sol[:, 1]
-    lines(ts, activity)
-end
+# simulation
+ts, as, sol = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts));
+# plot
+activity = sol[:, 1]
+lines(ts, activity)

@@ -11,7 +11,7 @@ end
 StochasticRDE(; n, refractoryperiod, decayrate, firingrate) = StochasticRDE(n, refractoryperiod, decayrate, firingrate)
 getfields(srde::StochasticRDE) = srde.n, srde.refractoryperiod, srde.decayrate, srde.firingrate
 
-function simulate(srde::StochasticRDE, initial_condition::Function, domains::Vector{Vector{Float64}}, dt::Float64; saveat::Int=1)::Tuple{Vector{Float64},Matrix{Float64}}
+function simulate(srde::StochasticRDE, initial_condition::Function, domains::Vector{Vector{Float64}}, dt::Float64; saveat::Int=1)
     # notations
     n_srde, a₀, α, φ = getfields(srde)
     da = dt
@@ -28,14 +28,14 @@ function simulate(srde::StochasticRDE, initial_condition::Function, domains::Vec
     ξ = 0
 
     # pre-allocation
-    len_ts = convert(Integer, fld(tmax - tmin, saveat * dt)) + 2
+    len_ts = convert(Integer, fld(tmax - tmin, saveat * dt)) + 2 + (saveat == 1)
     ts = zeros(Float64, len_ts)
     sol = zeros(Float64, (len_ts, length(u)))
 
     # initialization
-    j = 1
-    ts[j] = t
-    sol[j, :] = u
+    idt = 1
+    ts[idt] = t
+    sol[idt, :] = u
     elapsedtime_save = 0
     while (t < tmax)
         t += dt
@@ -52,11 +52,11 @@ function simulate(srde::StochasticRDE, initial_condition::Function, domains::Vec
         u[1] = newactivity
 
         if elapsedtime_save == saveat
-            j += 1
-            ts[j] = t
-            sol[j, :] = u
+            idt += 1
+            ts[idt] = t
+            sol[idt, :] = u
             elapsedtime_save = 0
         end
     end
-    return ts, sol
+    return ts, arange, sol
 end

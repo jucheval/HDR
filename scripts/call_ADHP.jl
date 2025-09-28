@@ -12,7 +12,7 @@ begin # parameters
     adhp = AgeDependentHawkesProcess(
         n=Int(1e4),
         refractoryperiod=1.0,
-        decayrate=50.0,
+        decayrate=10.0,
         firingrate=φ,
         firingratebound=φ̅
     )

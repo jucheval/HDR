@@ -1,6 +1,5 @@
 using Random
 using Distributions
-using Plots
 
 struct StochasticRDE
     n::Float64

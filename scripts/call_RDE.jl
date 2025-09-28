@@ -1,4 +1,5 @@
 include("../src/simu_RDE.jl")
+using CairoMakie
 
 # Sepúlveda 2023, Example 2
 φ(ξ) = 10.0 * ξ^2 / (ξ^2 + 1.0) + 0.5

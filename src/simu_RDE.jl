@@ -12,7 +12,7 @@ StochasticRDE(; n, refractoryperiod, decayrate, firingrate) = StochasticRDE(n, r
 
 function simulate(srde::StochasticRDE, initial_condition::Vector{Float64}, domains::Vector{Vector{Float64}}, dt::Float64; saveat::Int=1)::Tuple{Vector{Float64},Matrix{Float64}}
     da = dt
-    t = domains[1][1]
+    t = tmin = domains[1][1]
     tmax = domains[1][2]
     amin = domains[2][1]
     amax = domains[2][2]

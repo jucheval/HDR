@@ -19,7 +19,7 @@ function simulate(adhp::AgeDependentHawkesProcess, initial_condition::Vector{Flo
     tmax = domain[2]
 
     # initial conditions
-    ages = initial_condition
+    ages = copy(initial_condition)
     ξ = 0
 
     # simulation of a dominating Poisson Process with notations

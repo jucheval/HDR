@@ -13,10 +13,7 @@ begin # Parameters
         decayrate=50.0,
         firingrate=φ
     )
-    u₀ = pdf(Exponential(), (amin:dt:amax) .- 1.)
-    u₀ = u₀ / sum(dt * u₀)
 end
-
 begin # time grid
     tmin = amin = 0.
     tmax = 10.0
@@ -28,9 +25,12 @@ begin # time grid
     dt = 1e-3
     length_ts = 1000
 end
+begin # initial condition
+    u₀(a) = pdf(Exponential(), a - 1.)
+end
 
 begin # Simulation and plot of the activity
     ts, sol = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts))
     activity = sol[:, 1]
-    plot(ts, activity)
+    lines(ts, activity)
 end

@@ -12,6 +12,8 @@ end
 AgeDependentHawkesProcess(; n, refractoryperiod, decayrate, firingrate, firingratebound) = AgeDependentHawkesProcess(n, refractoryperiod, decayrate, firingrate, firingratebound)
 getfields(adhp::AgeDependentHawkesProcess) = adhp.n, adhp.refractoryperiod, adhp.decayrate, adhp.firingrate, adhp.firingratebound
 
+include("simu_Poisson.jl") # function to simulate an homogeneous Poisson process
+
 function simulate(adhp::AgeDependentHawkesProcess, initial_condition::Vector{Float64}, domain::Vector{Float64})
     # notations
     Nneur, a₀, α, φ, φ̅ = getfields(adhp)
@@ -49,14 +51,4 @@ function simulate(adhp::AgeDependentHawkesProcess, initial_condition::Vector{Flo
 
     h = History(times, marks, tmin, tmax)
     return h, ξs, activities
-end
-
-# Needed here because the current version of PointProcesses.jl on the general repository outputs an unsorted event_times vector.
-function Base.rand(pp::MultivariatePoissonProcess, tmin::Float64, tmax::Float64
-)
-    mark_dist = mark_distribution(pp)
-    N = rand(Poisson(float(ground_intensity(pp) * (tmax - tmin))))
-    times = sort!(rand(Uniform(tmin, tmax), N))
-    marks = [rand(mark_dist) for n in 1:N]
-    return History(; times=times, marks=marks, tmin=tmin, tmax=tmax)
 end

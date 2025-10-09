@@ -5,7 +5,9 @@ begin # Coombes and Laing 2011, Figure 1
     begin # parameters
         J(x) = 1 + 0.4 * sin(x)
         w(y, x) = J(y) * exp(-abs(x - y)) / 2
-        f(u) = 1.0 * (u > 0.3)
+        κ = 1 / 20
+        ρ = 0.3
+        f(u) = (1 + exp(-(u - ρ) / κ))^(-1)
         α = 1.0
         snfe = StochasticNFE(
             n=Inf,
@@ -38,7 +40,7 @@ begin # Agathe Nerine 2025, Figure 2
         w(y, x) = 2 * pi * cos(y - x)
         α = 1.0
         snfe = StochasticNFE(
-            n=100.,
+            n=Inf,
             decayrate=α,
             synapticweight=w,
             firingrate=f
@@ -62,7 +64,7 @@ end
 
 
 
-begin # Simulation and plot of the activity
+begin # Simulation
     ts, xs, sol = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(tmax - tmin, length_ts * dt)))
-end
+end;
 heatmap(ts, xs, sol)

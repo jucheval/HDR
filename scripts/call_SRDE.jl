@@ -26,6 +26,7 @@ begin # initial condition
 end
 
 # simulation
+Random.seed!(1)
 simulation = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts));
 # plot
 fig = plot(StochasticRDE, simulation);
@@ -60,6 +61,7 @@ begin # initial condition
 end
 
 # simulation
+Random.seed!(1)
 simulation = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts));
 fig = plot(StochasticRDE, simulation);
 

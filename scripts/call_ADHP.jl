@@ -19,6 +19,7 @@ begin # time domain
 end
 
 # simulation
+Random.seed!(1)
 simulation = simulate(adhp, initial_condition, domain)
 # plot
 fig = plot(AgeDependentHawkesProcess, simulation);
@@ -46,6 +47,7 @@ begin # time domain
 end
 
 # simulation
+Random.seed!(1)
 simulation = simulate(adhp, initial_condition, domain)
 # plot
 fig = plot(AgeDependentHawkesProcess, simulation);

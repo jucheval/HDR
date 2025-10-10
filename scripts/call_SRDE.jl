@@ -31,7 +31,7 @@ simulation = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / l
 fig = plot(StochasticRDE, simulation);
 
 # save figure
-save("plots/SRDE_1.png", fig, px_per_unit=2)
+#save("plots/SRDE_1.png", fig, px_per_unit=2)
 
 
 # Aperiodic solution
@@ -64,4 +64,4 @@ simulation = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / l
 fig = plot(StochasticRDE, simulation);
 
 # save figure
-save("plots/SRDE_2.png", fig, px_per_unit=2)
+#save("plots/SRDE_2.png", fig, px_per_unit=2)

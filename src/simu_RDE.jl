@@ -70,7 +70,7 @@ function Makie.plot(::Type{StochasticRDE}, simulation)
     axleft = Axis(fig[1, 1], xlabel=L"t", ylabel=L"a", title=L"heatmap of $u(t,a)$")
     axright = Axis(fig[1, 3], xlabel=L"t", ylabel=L"u(t,0)")
 
-    hm = heatmap!(axleft, ts, as, sol, colorscale=z -> log(z + 1 / 2))
+    hm = heatmap!(axleft, ts, as, sol, colorscale=z -> log(z + 1 / 2), colormap=Reverse(:viridis))
     Colorbar(fig[1, 2], hm)
 
     lines!(axright, ts, sol[:, 1], color=:darkblue)

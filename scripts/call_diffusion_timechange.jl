@@ -1,6 +1,5 @@
 include("../src/coupling_diffusion_timechange.jl")
 using CairoMakie
-using Random
 
 begin # parameters
     width = 5
@@ -24,7 +23,7 @@ dt = 0.1
 
 begin # plot
     Random.seed!(1)
-    fig = Figure()
+    fig = Figure(size=(800, 480))
 
     axtop = Axis(fig[1, 1])
     axbot = Axis(fig[2, 1], xlabel=L"t")
@@ -35,11 +34,14 @@ begin # plot
 
     ts, t̃s, Bs = coupling(tcbm, tcbmtilde, 0.0, domain, dt)
     lines!(axtop, ts[ts.<tmax], Bs[ts.<tmax], alpha=0.8, color=:darkblue)
-    lines!(axtop, t̃s[t̃s.<tmax], Bs[t̃s.<tmax], alpha=0.8, color=:red)
+    lines!(axtop, t̃s[t̃s.<tmax], Bs[t̃s.<tmax], alpha=0.8, color=:orange)
 
     ts, t̃s, Bs = coupling(tcbm, tcbmtilde, 0.0, domain, dt)
     lines!(axbot, ts[ts.<tmax], Bs[ts.<tmax], alpha=0.8, color=:darkblue)
-    lines!(axbot, t̃s[t̃s.<tmax], Bs[t̃s.<tmax], alpha=0.8, color=:red)
+    lines!(axbot, t̃s[t̃s.<tmax], Bs[t̃s.<tmax], alpha=0.8, color=:orange)
 
     fig
 end
+
+# save figure
+#save("plots/coupling_diffusion_timechange.png", fig, px_per_unit=2)

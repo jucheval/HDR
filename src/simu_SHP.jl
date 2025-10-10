@@ -1,5 +1,6 @@
 using PointProcesses
 using Distributions
+using CairoMakie
 
 struct SpatialHawkesProcess
     n::Int
@@ -69,4 +70,20 @@ end
 
 function synapticweightmatrix(xs, w)
     [w(xs[i], xs[j]) for i in eachindex(xs), j in eachindex(xs)]
+end
+
+function Makie.plot(::Type{SpatialHawkesProcess}, simulation)
+    h, ts, xs, Umat = simulation
+    fig = Figure(size=(600, 300))
+
+    axleft = Axis(fig[1, 1], xlabel=L"t", ylabel=L"x", title=L"heatmap of $U^n(t,x)$")
+    axright = Axis(fig[1, 3], xlabel=L"t", ylabel=L"x", title="raster plot")
+
+    hm = heatmap!(axleft, ts, xs, Umat)
+    Colorbar(fig[1, 2], hm)
+
+    ids = findall(event_marks(h) .!= 0)
+    scatter!(axright, event_times(h)[ids], xs[event_marks(h)[ids]], markersize=1, color=:black)
+
+    fig
 end

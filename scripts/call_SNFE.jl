@@ -9,7 +9,7 @@ begin # Coombes and Laing 2011, Figure 1
         f(u) = (1 + exp(-(u - ρ) / κ))^(-1)
         α = 1.0
         snfe = StochasticNFE(
-            n=1000.,
+            n=300.,
             decayrate=α,
             synapticweight=w,
             firingrate=f
@@ -32,12 +32,14 @@ begin # Coombes and Laing 2011, Figure 1
 end
 
 # simulation
+Random.seed!(1)
 simulation = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(tmax - tmin, length_ts * dt)))
 # plot
 fig = plot(StochasticNFE, simulation)
+fig.content[1].title = L"heatmap of $u^n(t,x)$"
 
 # save figure
-save("plots/SNFE_1.png", fig, px_per_unit=2)
+#save("plots/SNFE_1.png", fig, px_per_unit=2)
 
 
 begin # Agathe Nerine 2025, Figure 2
@@ -48,7 +50,7 @@ begin # Agathe Nerine 2025, Figure 2
         w(y, x) = 2 * pi * cos(y - x)
         α = 1.0
         snfe = StochasticNFE(
-            n=1000.,
+            n=300.,
             decayrate=α,
             synapticweight=w,
             firingrate=f
@@ -71,9 +73,11 @@ begin # Agathe Nerine 2025, Figure 2
 end
 
 # simulation
+Random.seed!(1)
 simulation = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(tmax - tmin, length_ts * dt)))
 # plot
 fig = plot(StochasticNFE, simulation)
+fig.content[1].title = L"heatmap of $u^n(t,x)$"
 
 # save figure
-save("plots/SNFE_2.png", fig, px_per_unit=2)
+#save("plots/SNFE_2.png", fig, px_per_unit=2)

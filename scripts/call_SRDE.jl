@@ -30,6 +30,8 @@ Random.seed!(1)
 simulation = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts));
 # plot
 fig = plot(StochasticRDE, simulation);
+fig.content[1].title = L"heatmap of $u^n(t,x)$"
+fig.content[2].ylabel = L"u^n(t,0)"
 
 # save figure
 #save("plots/SRDE_1.png", fig, px_per_unit=2)
@@ -64,6 +66,8 @@ end
 Random.seed!(1)
 simulation = simulate(srde, u₀, domains, dt; saveat=Int((tmax - tmin) / dt / length_ts));
 fig = plot(StochasticRDE, simulation);
+fig.content[1].title = L"heatmap of $u^n(t,x)$"
+fig.content[2].ylabel = L"u^n(t,0)"
 
 # save figure
 #save("plots/SRDE_2.png", fig, px_per_unit=2)

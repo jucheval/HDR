@@ -1,9 +1,8 @@
 include("../src/simu_SHP.jl")
-using CairoMakie
 
 begin # Coombes and Laing 2011, Figure 1
     begin # parameters
-        Nneur = 1000
+        Nneur = 300
         J(x) = 1 + 0.4 * sin(x)
         w(y, x) = J(y) * exp(-abs(x - y)) / 2
         κ = 1 / 20
@@ -29,9 +28,18 @@ begin # Coombes and Laing 2011, Figure 1
     end
 end;
 
+# simulation
+Random.seed!(1)
+simulation = simulate(shp, u₀, domain, length_ts=1000)
+# plot
+fig = plot(SpatialHawkesProcess, simulation)
+
+# save figure
+#save("plots/SHP_1.png", fig, px_per_unit=2)
+
 begin # Agathe Nerine 2025, Figure 2
     begin # parameters
-        Nneur = 1000
+        Nneur = 300
         κ = 1 / 20
         ρ = 1 / 2
         f(u) = (1 + exp(-(u - ρ) / κ))^(-1)
@@ -56,7 +64,11 @@ begin # Agathe Nerine 2025, Figure 2
     end
 end;
 
-begin # Simulation
-    h, ts, xs, Umat = simulate(shp, u₀, domain, length_ts=1000)
-end;
-heatmap(ts, xs, Umat)
+# simulation
+Random.seed!(1)
+simulation = simulate(shp, u₀, domain, length_ts=1000)
+# plot
+fig = plot(SpatialHawkesProcess, simulation)
+
+# save figure
+#save("plots/SHP_2.png", fig, px_per_unit=2)

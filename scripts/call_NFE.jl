@@ -37,7 +37,7 @@ simulation = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(t
 fig = plot(StochasticNFE, simulation)
 
 # save figure
-save("plots/NFE_1.png", fig, px_per_unit=2)
+#save("plots/NFE_1.png", fig, px_per_unit=2)
 
 
 begin # Agathe Nerine 2025, Figure 2
@@ -76,4 +76,4 @@ simulation = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(t
 fig = plot(StochasticNFE, simulation)
 
 # save figure
-save("plots/NFE_2.png", fig, px_per_unit=2)
+#save("plots/NFE_2.png", fig, px_per_unit=2)

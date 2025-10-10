@@ -68,7 +68,7 @@ function Makie.plot(::Type{StochasticRDE}, simulation)
     fig = Figure(size=(600, 300))
 
     axleft = Axis(fig[1, 1], xlabel=L"t", ylabel=L"a", title=L"heatmap of $u(t,a)$")
-    axright = Axis(fig[1, 3], xlabel=L"t", ylabel=L"u(t,0)")
+    axright = Axis(fig[1, 3], xlabel=L"t", ylabel=L"u(t,0)", title="mean firing rate")
 
     hm = heatmap!(axleft, ts, as, sol, colorscale=z -> log(z + 1 / 2), colormap=Reverse(:viridis))
     Colorbar(fig[1, 2], hm)

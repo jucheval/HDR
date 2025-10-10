@@ -67,7 +67,7 @@ end
 
 function Makie.plot(::Type{StochasticNFE}, simulation)
     ts, xs, sol = simulation
-    fig = Figure(size=(600, 300))
+    fig = Figure(size=(350, 300))
 
     ax = Axis(fig[1, 1], xlabel=L"t", ylabel=L"x", title=L"heatmap of $u(t,x)$")
 

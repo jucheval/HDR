@@ -9,10 +9,10 @@ begin # parameters
         standarddeviation=x -> sd
     )
     diffusiontilde = Diffusion(
-        drift=x -> -(x - offset),
+        drift=x -> -2 * x,
         standarddeviation=x -> sd
     )
-    initial_conditions = [0.0, offset]
+    initial_conditions = [0.0, 0.0]
 end
 
 begin # time grid 
@@ -24,15 +24,25 @@ end
 
 begin # plot
     Random.seed!(1)
-    fig = Figure()
-    ax = Axis(fig[1, 1], yticks=(
-        [1.5, 2.0, 2.5, 3.5, 4.0, 4.5, 5.5, 6.0, 6.5],
-        string.(repeat([-1, 0, 1], 3))))
+    fig = Figure(size=(1000, 400))
+
+    ax = Axis(fig[1, 1],
+        yticks=(
+            [1.5, 2.0, 2.5, 3.5, 4.0, 4.5, 5.5, 6.0, 6.5],
+            string.(repeat([-1, 0, 1], 3))
+        ),
+        xlabel=L"t", ylabel=L"X"
+    )
+    hlines!(ax, [3, 5], color=:grey) # hilne to delimit the three pairs of curves
+
     for k in 1:3
         ts, Xs, X̃s = coupling(diffusion, diffusiontilde, initial_conditions, domain, dt)
         lines!(ax, ts, Xs .+ 2 * k, alpha=0.8, color=:darkblue)
-        lines!(ax, ts, X̃s .+ 2 * k, alpha=0.8, color=:red)
+        lines!(ax, ts, X̃s .+ 2 * k, alpha=0.8, color=:orange)
     end
-    hlines!(ax, [3, 5], color=:grey)
+
     fig
 end
+
+# save figure
+#save("plots/coupling_diffusion_SDE.png", fig, px_per_unit=2)

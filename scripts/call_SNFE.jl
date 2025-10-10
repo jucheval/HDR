@@ -9,7 +9,7 @@ begin # Coombes and Laing 2011, Figure 1
         f(u) = (1 + exp(-(u - ρ) / κ))^(-1)
         α = 1.0
         snfe = StochasticNFE(
-            n=Inf,
+            n=1000.,
             decayrate=α,
             synapticweight=w,
             firingrate=f
@@ -37,7 +37,7 @@ simulation = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(t
 fig = plot(StochasticNFE, simulation)
 
 # save figure
-save("plots/NFE_1.png", fig, px_per_unit=2)
+save("plots/SNFE_1.png", fig, px_per_unit=2)
 
 
 begin # Agathe Nerine 2025, Figure 2
@@ -48,7 +48,7 @@ begin # Agathe Nerine 2025, Figure 2
         w(y, x) = 2 * pi * cos(y - x)
         α = 1.0
         snfe = StochasticNFE(
-            n=Inf,
+            n=1000.,
             decayrate=α,
             synapticweight=w,
             firingrate=f
@@ -76,4 +76,4 @@ simulation = simulate(snfe, u₀, domains, dt, dx; saveat=convert(Integer, fld(t
 fig = plot(StochasticNFE, simulation)
 
 # save figure
-save("plots/NFE_2.png", fig, px_per_unit=2)
+save("plots/SNFE_2.png", fig, px_per_unit=2)

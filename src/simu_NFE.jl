@@ -1,7 +1,9 @@
 using Random
 using Distributions
+using CairoMakie
 
 # Space is 1 dimensional
+# The spatial distribution ρ is the Lebesgue measure on the spatial domain interval
 
 struct StochasticNFE
     n::Float64
@@ -20,10 +22,12 @@ function simulate(snfe::StochasticNFE, initial_condition::Function, domains::Vec
     tmax = domains[1][2]
     xmin = domains[2][1]
     xmax = domains[2][2]
+    scalingfactor = xmax - xmin
+    eαdt = exp(-α * dt)
 
     # spatial grid and initial conditions
     xgrid = xmin:dx:xmax
-    wtranspose = dx * transpose(synapticweightmatrix(xgrid, w)) # each point corresponds to the volume dx
+    wtranspose = scalingfactor * transpose(synapticweightmatrix(xgrid, w))
     nx = length(xgrid)
     u = initial_condition.(xgrid)
 
@@ -42,10 +46,10 @@ function simulate(snfe::StochasticNFE, initial_condition::Function, domains::Vec
         t += dt
         elapsedtime_save += 1
         if (n_snfe < Inf)
-            noise .= rand(Normal(), nx) / sqrt(dx) # the sqrt compensates for the volume dx above
+            noise .= rand(Normal(), nx)
         end
-        fdt = dt * f.(u)
-        u = exp(-α * dt) * u + wtranspose * (fdt + sqrt.(fdt / n_snfe) .* noise)
+        fdtdx = dt * f.(u) * dx / scalingfactor
+        u = eαdt * u + wtranspose * (fdtdx + sqrt.(fdtdx / n_snfe) .* noise)
 
         if elapsedtime_save == saveat
             idt += 1
@@ -59,4 +63,16 @@ end
 
 function synapticweightmatrix(xs, w)
     [w(xs[i], xs[j]) for i in eachindex(xs), j in eachindex(xs)]
+end
+
+function Makie.plot(::Type{StochasticNFE}, simulation)
+    ts, xs, sol = simulation
+    fig = Figure(size=(600, 300))
+
+    ax = Axis(fig[1, 1], xlabel=L"t", ylabel=L"x", title=L"heatmap of $u(t,x)$")
+
+    hm = heatmap!(ax, ts, xs, sol)
+    Colorbar(fig[1, 2], hm)
+
+    fig
 end

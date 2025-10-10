@@ -23,8 +23,8 @@ function coupling(tcbm::TimeChangeBrownianMotion, tcbm_tilde::TimeChangeBrownian
     t̃s = [t̃]
     Bs = [B]
     while min(t, t̃) < tmax
-        t += τ(B) * dt
-        t̃ += τ̃(B) * dt
+        t += dt / τ(B)
+        t̃ += dt / τ̃(B)
         push!(ts, t)
         push!(t̃s, t̃)
         B += sdt * rand(Normal())

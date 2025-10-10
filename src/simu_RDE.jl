@@ -47,6 +47,7 @@ function simulate(srde::StochasticRDE, initial_condition::Function, domains::Vec
         for i in length(u):-1:2
             uφdt = u[i-1] * φ(ξ) * (i - 1 >= i₀) * dt
             increment = max(0, uφdt + rand(Normal()) * sqrt((max(uφdt, 0.0)) / n_srde))
+            increment = min(increment, u[i-1])
             u[i] = u[i-1] - increment
             newactivity += increment
         end

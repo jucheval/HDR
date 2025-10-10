@@ -1,5 +1,6 @@
 using PointProcesses
 using Distributions
+using CairoMakie
 
 struct AgeDependentHawkesProcess
     n::Int
@@ -51,4 +52,25 @@ function simulate(adhp::AgeDependentHawkesProcess, initial_condition::Vector{Flo
 
     h = History(times, marks, tmin, tmax)
     return h, ξs, activities
+end
+
+function Makie.plot(::Type{AgeDependentHawkesProcess}, simulation)
+    h, _, activities = simulation
+    fig = Figure(size=(600, 300))
+
+    axscatt = Axis(fig[1, 1], ylabel="neuron",)
+    axlines = Axis(fig[1, 1], yticklabelcolor=:darkblue, yaxisposition=:right, ylabel="mean firing rate", ylabelcolor=:darkblue)
+    hidespines!(axlines)
+    hidexdecorations!(axlines)
+    hideydecorations!(axscatt, label=false, ticklabels=false)
+
+    ids = findall(event_marks(h) .!= 0)
+    scatter!(axscatt, event_times(h)[ids], event_marks(h)[ids], markersize=4, color=:black)
+
+    ids = 1:floor(Int, length(h) / length_ts):length(h)
+    ts = event_times(h)[ids]
+    ys = activities[ids]
+    lines!(axlines, ts, ys, color=:darkblue)
+
+    fig
 end

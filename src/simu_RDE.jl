@@ -1,5 +1,6 @@
 using Random
 using Distributions
+using CairoMakie
 
 struct StochasticRDE
     n::Float64
@@ -59,4 +60,19 @@ function simulate(srde::StochasticRDE, initial_condition::Function, domains::Vec
         end
     end
     return ts, arange, sol
+end
+
+function Makie.plot(::Type{StochasticRDE}, simulation)
+    ts, as, sol = simulation
+    fig = Figure(size=(600, 300))
+
+    axleft = Axis(fig[1, 1], xlabel=L"t", ylabel=L"a", title=L"heatmap of $u(t,a)$")
+    axright = Axis(fig[1, 3], xlabel=L"t", ylabel=L"u(t,0)")
+
+    hm = heatmap!(axleft, ts, as, sol, colorscale=z -> log(z + 1 / 2))
+    Colorbar(fig[1, 2], hm)
+
+    lines!(axright, ts, sol[:, 1], color=:darkblue)
+
+    fig
 end

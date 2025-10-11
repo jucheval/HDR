@@ -66,7 +66,7 @@ begin # simulation
 end
 
 begin # plot
-    fig = Figure()
+    fig = Figure(size=(800, 480))
 
     axtop = Axis(fig[1, 1], ylabel=L"U^1")
     axbot = Axis(fig[2, 1], ylabel=L"U^2", xlabel=L"t")
@@ -75,15 +75,18 @@ begin # plot
     xlims!(axbot, 0, 140)
 
     kwargs = (; alpha=0.7)
-    lines!(axtop, coupled_counting.spike_train[begin:20:end], coupled_counting.X[1, begin:20:end]; color=:red, kwargs...)
-    lines!(axtop, coupled_diffusion.time, coupled_diffusion.X[1, :]; color=:darkblue, kwargs...)
-    lines!(axtop, test_diffusion.time, test_diffusion.X[1, :]; color=:darkblue, linestyle=:dot, kwargs...)
+    lines!(axtop, coupled_diffusion.time, coupled_diffusion.X[1, :]; color=:orange, kwargs...)
+    lines!(axtop, coupled_counting.spike_train[begin:20:end], coupled_counting.X[1, begin:20:end]; color=:darkblue, kwargs...)
+    lines!(axtop, test_diffusion.time, test_diffusion.X[1, :]; color=:orange, linestyle=:dot, kwargs...)
     lines!(axtop, ODE_traj.time, ODE_traj.X[1, :]; color=:black, kwargs...)
 
-    lines!(axbot, coupled_counting.spike_train[begin:20:end], coupled_counting.X[eta_vec[1]+1, begin:20:end]; color=:red, kwargs...)
-    lines!(axbot, coupled_diffusion.time, coupled_diffusion.X[eta_vec[1]+1, :]; color=:darkblue, kwargs...)
-    lines!(axbot, test_diffusion.time, test_diffusion.X[eta_vec[1]+1, :]; color=:darkblue, linestyle=:dot, kwargs...)
+    lines!(axbot, coupled_diffusion.time, coupled_diffusion.X[eta_vec[1]+1, :]; color=:orange, kwargs...)
+    lines!(axbot, coupled_counting.spike_train[begin:20:end], coupled_counting.X[eta_vec[1]+1, begin:20:end]; color=:darkblue, kwargs...)
+    lines!(axbot, test_diffusion.time, test_diffusion.X[eta_vec[1]+1, :]; color=:orange, linestyle=:dot, kwargs...)
     lines!(axbot, ODE_traj.time, ODE_traj.X[eta_vec[1]+1, :]; color=:black, kwargs...)
 
     fig
 end
+
+# save figure
+save("plots/coupling-2CHP.png", fig, px_per_unit=2)

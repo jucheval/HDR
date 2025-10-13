@@ -75,18 +75,29 @@ begin # plot
     xlims!(axbot, 0, 140)
 
     kwargs = (; alpha=0.7)
-    lines!(axtop, coupled_diffusion.time, coupled_diffusion.X[1, :]; color=:orange, kwargs...)
-    lines!(axtop, coupled_counting.spike_train[begin:20:end], coupled_counting.X[1, begin:20:end]; color=:darkblue, kwargs...)
-    lines!(axtop, test_diffusion.time, test_diffusion.X[1, :]; color=:orange, linestyle=:dot, kwargs...)
-    lines!(axtop, ODE_traj.time, ODE_traj.X[1, :]; color=:black, kwargs...)
+    lines!(axtop, coupled_counting.spike_train[begin:20:end], coupled_counting.X[1, begin:20:end];
+        color=:darkblue, label=L"U^1_t", kwargs...)
+    lines!(axtop, coupled_diffusion.time, coupled_diffusion.X[1, :];
+        color=:orange, label=L"$\overline{U}^1_t$ coupled", kwargs...)
+    lines!(axtop, test_diffusion.time, test_diffusion.X[1, :];
+        color=:orange, label=L"$\overline{U}^1_t$ indep.", linestyle=:dot, kwargs...)
+    lines!(axtop, ODE_traj.time, ODE_traj.X[1, :];
+        color=:black, label="MF limit", kwargs...)
 
-    lines!(axbot, coupled_diffusion.time, coupled_diffusion.X[eta_vec[1]+1, :]; color=:orange, kwargs...)
-    lines!(axbot, coupled_counting.spike_train[begin:20:end], coupled_counting.X[eta_vec[1]+1, begin:20:end]; color=:darkblue, kwargs...)
-    lines!(axbot, test_diffusion.time, test_diffusion.X[eta_vec[1]+1, :]; color=:orange, linestyle=:dot, kwargs...)
-    lines!(axbot, ODE_traj.time, ODE_traj.X[eta_vec[1]+1, :]; color=:black, kwargs...)
+    lines!(axbot, coupled_counting.spike_train[begin:20:end], coupled_counting.X[eta_vec[1]+1, begin:20:end];
+        color=:darkblue, label=L"U^2_t", kwargs...)
+    lines!(axbot, coupled_diffusion.time, coupled_diffusion.X[eta_vec[1]+1, :];
+        color=:orange, label=L"$\overline{U}^2_t$ coupled", kwargs...)
+    lines!(axbot, test_diffusion.time, test_diffusion.X[eta_vec[1]+1, :];
+        color=:orange, label=L"$\overline{U}^2_t$ indep.", linestyle=:dot, kwargs...)
+    lines!(axbot, ODE_traj.time, ODE_traj.X[eta_vec[1]+1, :];
+        color=:black, label="MF limit", kwargs...)
+
+    Legend(fig[1, 2], axtop)
+    Legend(fig[2, 2], axbot)
 
     fig
 end
 
 # save figure
-save("plots/coupling-2CHP.png", fig, px_per_unit=2)
+#save("plots/coupling-2CHP.png", fig, px_per_unit=2)

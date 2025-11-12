@@ -6,7 +6,7 @@ struct SpatialHawkesProcess
     n::Int
     decayrate::Float64
     synapticweight::Function
-    positions::Vector{Float64}
+    positions::Vector
     firingrate::Function
     firingratebound::Float64
 

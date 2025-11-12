@@ -8,6 +8,7 @@ ExponentialUtilities = "d4d017d3-3776-5f7e-afef-a10c40355c18"
 MeanFieldGraph = "f3c20582-38a4-43ca-95fd-b3c95fb7ac78"
 PointProcesses = "af0b7596-9bb0-472a-a012-63904f2b4c55"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+WGLMakie = "276b4fcb-3e11-5398-bf8b-a0c2d153d008"
 
 [compat]
 CairoMakie = "0.15"

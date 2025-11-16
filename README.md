@@ -1,6 +1,6 @@
 # HDR
 
-This code base contains the material used to plot most of the figures in my HDR manuscript. Here is the exhaustive list of figures:
+This repository contains my [HDR manuscript](manuscript.pdf) and the material used to plot most of the figures. Here is the exhaustive list of figures:
 
 - Figure I.1: [julia script file](scripts/figure-I-1.jl)
 - Figure II.1: [julia script file](scripts/figure-II-1.jl)

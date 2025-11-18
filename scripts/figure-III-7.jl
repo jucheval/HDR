@@ -52,7 +52,7 @@ begin # Agathe Nerine 2025, Figure 2
         tmax = 100.0
         xmin = -pi
         xmax = pi
-        domains = [tmin, tmax]
+        domain = [tmin, tmax]
         shp = SpatialHawkesProcess(
             n=Nneur,
             decayrate=α,

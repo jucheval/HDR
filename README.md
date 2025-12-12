@@ -1,6 +1,14 @@
 # HDR
 
-This repository contains my [HDR manuscript](manuscript.pdf) and the material used to plot most of the figures. Here is the exhaustive list of figures:
+This repository contains my [HDR manuscript](manuscript.pdf) and the slides used during the defense.
+
+## Slides for the defense
+
+I used [Pluto.jl](https://plutojl.org) and [Makie.jl](https://docs.makie.org/stable/) to produce the slides. You can reproduce them by opening the file [notebooks/slides.jl](notebooks/slides.jl) as a Pluto notebook.
+
+## Figures of the manuscript
+
+Here is the exhaustive list of figures with a link to the script file used to produce them.
 
 - Figure I.1: [julia script file](scripts/figure-I-1.jl)
 - Figure II.1: [julia script file](scripts/figure-II-1.jl)

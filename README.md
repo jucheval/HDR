@@ -42,7 +42,7 @@ To (locally) reproduce this project, do the following (as advised by [DrWatson](
    git-history and may need to be downloaded independently.
 1. Open a Julia console and do:
 
-   ```
+   ```julia
    julia> using Pkg
    julia> Pkg.add("DrWatson") # install globally, for using `quickactivate`
    julia> Pkg.activate("path/to/this/project")

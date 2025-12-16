@@ -4,7 +4,7 @@ This repository contains my [HDR manuscript](manuscript.pdf) and the slides used
 
 ## Slides for the defense
 
-I used [Pluto.jl](https://plutojl.org) and [Makie.jl](https://docs.makie.org/stable/) to produce the slides. You can reproduce them by opening the file [notebooks/slides.jl](notebooks/slides.jl) as a Pluto notebook.
+I used [Pluto.jl](https://plutojl.org) and [Makie.jl](https://docs.makie.org/stable/) to produce the slides. You can reproduce them by opening the file [notebooks/slides.jl](notebooks/slides.jl) as a Pluto notebook. Note that the notebook is optimized for a light themed browser and a monitor resolution of 1512 x 982.
 
 ## Figures of the manuscript
 

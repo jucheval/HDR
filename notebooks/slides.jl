@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.20
+# v0.20.21
 
 using Markdown
 using InteractiveUtils
@@ -63,20 +63,6 @@ html"""Powered by &nbsp <img alt="Pluto.jl" src="https://raw.githubusercontent.c
 # ╔═╡ cbcef609-0781-4728-8a6a-937f82b67c1a
 md"## My scientific research field"
 
-# ╔═╡ dd29b1c5-6bd9-48c6-aaa8-de2e951c44ce
-md"""
-TODO : refaire les box pour griser RDE.
-FIXME:
-- 3 mathematical domains evolving around the notions of PP and neuro.
-- Manuscript organized by mathematical fields to emphasize this plurality. Slides organized by papers.
-- PP/Neuro : Patricia thaught me most of what I know. Explain the color code. Keywords.
-- PDE : At the beginning of my PhD I didn't know much about it. Marie and Maria helped me. Keywords.
-- Proba : I met Guilherme during postdoc. Mean-field and COUPLING.
-- Statistics : Fun fact. I started my career with stats but only came back to this topic recently. Collab with Grenoble.
-- Julia enthusiast for 2 years and I am using Pluto.jl and Makie.jl
-- Choice: avoid technicalities, favor high level explanations, plots and animations
-"""
-
 # ╔═╡ f04d0ada-3fd5-4441-8d07-67dec5da2504
 md"## Table of contents"
 
@@ -95,13 +81,6 @@ md"""
 \
 
 ### 5. [Large networks estimation](#A-linear-model-with-inhibition)
-"""
-
-# ╔═╡ 8a68c356-c1b7-492b-bdc7-b7ac2dd96a3a
-md"""
-FIXME: add links to every sections above
-- first 3 parts are introductions to central topics in my career
-- Then, applied to 2 problems
 """
 
 # ╔═╡ 0ca0d6a0-2bfd-4f29-aeff-a81b87e3be3b
@@ -152,18 +131,6 @@ Columns(@markdown("""
     end
 )
 
-# ╔═╡ 5a5d3447-fbcc-42a1-92f1-f6bbb6825d3f
-md"""FIXME
-- 2 scales
-- as the voltage of a neuron increases, it charges and then release this energy through a spike
-- neurons communicate via spikes
-- explain refractory period
-- show raster plot -> spike trains
-- neuron interactions via synapses
-- interplay between E/I populations
-- 2 phenomena emmerging at the level of the network : spatial organization, oscillations
-"""
-
 # ╔═╡ 6007b1d3-17b0-47e8-ab83-6587a66d17e8
 md"## Neurosciences (2/2)"
 
@@ -183,14 +150,6 @@ md"""
   - Time change
 """
 
-# ╔═╡ 58e967cc-6937-4941-953b-f79c822559c4
-md"""FIXME
-- spike trains / raster plots
-- Poisson generalized
-- neuron $i$ excites or inhibits neuron $j$
-- main tools I used are the two representations
-"""
-
 # ╔═╡ c448e7c4-34c9-43bf-9171-0f9a1915e8fb
 md"## Hawkes processes"
 
@@ -204,14 +163,6 @@ md"## Hawkes processes"
 - Usually, ``f_i \\nearrow`` so that ``{\\color{red} h_{j \\to i} > 0}`` (*resp.* ``{\\color{blue} h_{j \\to i} &lt 0}``) means <span id="red">excitation</span> (*resp.* <span id="blue">inhibition</span>).
 - Convenient cases: ``f_i(u) = \\mu + u`` and ``h_{j \\to i}(t) = w e^{-\\alpha t}``.
 """)
-
-# ╔═╡ 7da9719f-2617-4eee-86fa-20dba7728dd2
-md"""FIXME
-- intensity is function of voltage
-- counting measure of the spikes
-- f linear and h exponential
-- move $\mu$, $\alpha$ and $\beta_{22}$
-"""
 
 # ╔═╡ a933cf6b-306f-4940-a4ca-bf493376c515
 md"## Coupling (1/2)"
@@ -287,14 +238,6 @@ md"""
 	$W_p(\nu_{1}, \nu_{2}) := \inf_{\pi} \left(  \int_{E \times E} d(x_1,x_2)^p \, \pi(\mathrm{d}x_1,\mathrm{d}x_2) \right)^{1/p}= \inf_{(X_1,X_2)} \mathbb{E}\left[ d(X_1,X_2)^{p} \right]^{1/p},$
 """
 
-# ╔═╡ 3f5dba59-d773-45ac-b7e7-f555374a6340
-md"""FIXME
-- usually we deal with distributions in a weak sense (tested against functions)
-- coupling gives more concrete sense (called strong)
-- in terms of r.v., a coupling is a couple of r.v. such that the marginals are prescribed
-- examples
-"""
-
 # ╔═╡ 9ff8a2e5-4e31-4971-bbd6-fc17d9f1b737
 md"## Coupling (2/2)"
 
@@ -363,49 +306,8 @@ html"</br>"
 # ╔═╡ dc8f4bd1-77ea-49c9-8dac-54f8f7064d48
 md"## Mean-field approximation"
 
-# ╔═╡ 4394c62c-57bf-486a-af2d-cc9c16715e26
-md"""FIXME
-- green particle is not really influenced by each other particles individually but merely by their statistical distribution
-- in the limit, it is influenced by the limit distribution of the particles including itself
-- 3 objectives in the manuscript but I preferred 4 today.
-- historical survey
-- Objective 4 is original
-"""
-
-# ╔═╡ eeb75f07-3dbe-4b48-8498-e532f2418ed6
-DOM.div(md"### Main objectives",
-    md"""
-    1. Find the limit equation and associated Fokker-Planck equation [Weiss, 1907]
-        - Empirical distribution is replaced by distribution of the limit process
-        - Solve McKean-Vlasov non-linearity via the PDE
-    """,
-    md"""
-    2. Prove that the approximation is consistent (rate $n^{-1/2}$) [Sznitman, 1991]
-        - Convergence of the empirical distribution is equivalent to convergence of pairs of particles
-        - Couple dependent particles with independent limit particles via Thinning
-    """,
-    md"""
-    3. Prove a CLT for the fluctuations [Méléard, 1996]
-        - Approximation rates in terms of $W_p$ or $\mathrm{TV}$
-        - Tightness criterion in a suitable distributional space
-    """,
-    md"""
-    4. Derive a first-order approximation (rate $n^{-1}$)
-        - Fluctuations CLT $\leftrightarrow$ linearization of a non-linear SPDE
-    """)
-
 # ╔═╡ a3a74379-384e-4e04-9a69-dbaad58a7cd2
 md"## Spatial Hawkes process / Neural Field Equation (1/3)"
-
-# ╔═╡ ee2d968a-a662-4da4-a17c-19839dffbfc2
-md"""FIXME
-- neurons have positions in $R^d$
-- intensity is a function of the voltage
-- voltage satisfy an SDE (corresponds to exp. delay function)
-- Right : heatmap of the voltage as t and x
-- NFE : same dyanmics for the voltage but there is a continuous spatial distribution of neurons. 
-- The averaged counting measures is replaced by the firing rate
-"""
 
 # ╔═╡ 05f5212c-44a8-40c7-89b8-ad1abf863fc6
 md"### Plot parameters"
@@ -499,16 +401,6 @@ md"## Multi-class Hawkes process - Ditlevsen & Löcherbach (2017)"
 	```
 """)
 
-# ╔═╡ 7d3e5eac-cea0-47f7-840e-485dccc715ec
-md"""FIXME
-- 6 discrete locations
-- all to all connection from neurons in pop. 1 to neurons in pop. 2 and so on...
-- neurons of the same pop. share the same voltage variable
-- Erlang function generalizes the exponential one.
-- for each pop. the averaged counting measure is replaced by the firing rate + some diffusion noise
-- weak diffusion approximation has been proved by Dit and Loc
-"""
-
 # ╔═╡ 2435405c-8428-4af0-8d4e-4ae099cf3f13
 md"## Strong diffusion approximation of Poisson process"
 
@@ -519,13 +411,6 @@ md"""
 	
 	$\sup_{t\geq 0} \frac{|{\color{darkblue}\Pi_t - t} - {\color{orange}B_t}|}{\ln(2 \vee t)} < \infty$
 	admits exponential moments.
-"""
-
-# ╔═╡ e901002e-e3c7-4d38-be78-c59032d604b6
-md"""FIXME
-- historical case
--  $B_t$ on a coarse resolution
-- I have an animation to explain how it is done if you want
 """
 
 # ╔═╡ b7542278-c465-4096-921d-aee94dc3adbf
@@ -621,17 +506,6 @@ $\mathbb{P}_{\psi}\left( X^{n,i}_{t} = 1 | X^n_{t-1} = x \right) = \mu + \gamma 
 - **Assumption:** $\operatorname{Card}\{\mathcal{P}_+\}/n \to r_+$
 """
 
-# ╔═╡ c60f7a22-703e-4cbe-95d8-09039d080d04
-md"""FIXME
-- latent random Erdos-Rényi graph
-- discrete process in time and values (0,1).
-- Once the graph is fixed, the process is a MC
-- proportion of excitatory and inhibitory neurons converges to something
-- move $\mu$ below 0.5 and leave it low
-- move $\gamma$ and leave it low
-- move $r_+$
-"""
-
 # ╔═╡ c562f965-72e2-4a7b-a649-53ac2d83908a
 md"## Graph density estimation"
 
@@ -666,14 +540,6 @@ md"""
 	$\mathbb{P}_\theta\left( \| \hat{\theta}^n_t - \theta\|_{\infty} \geq \varepsilon \right)
     \lesssim_{\gamma} \left( {\color{darkblue}\frac{\sqrt{n}}{t}+\frac{1}{\sqrt{n}}}
     +\frac{\gamma^{\Delta}}{\Delta}+\sqrt{\frac{\Delta}{t}}\right) \varepsilon^{-1}.$
-"""
-
-# ╔═╡ 2901a2cb-a2c8-48d9-873e-1a6213d29cad
-md"""FIXME
-- some kind of method of moments
-- main stuff is that we get their limits as functions of $\theta$
--  $1/\sqrt{n}$ comes from the limit of $\hat{v}$ as $n\to \infty$
--  $\sqrt{n}/t$ comes from the limit of $\hat{v}$ as $t\to \infty$, due to the sum of squares
 """
 
 # ╔═╡ 00139eee-0abb-4409-8c96-cd44a6395d79
@@ -752,19 +618,8 @@ md"""
 	If $n\to \infty$ and $\frac{n}{\sqrt{t}}{\small\ln (nt)} \to 0$, then $\mathbb{P}\left(\left\{\hat{{\cal P}}_{+}^{n,t}={\cal P_{+}}\right\}\cap \left\{\hat{{\cal P}}_{-}^{n,t}={\cal P_{-}}\right\} \right) \to 1$.
 """
 
-# ╔═╡ f5f6c19c-b4d1-40b5-8598-fcc66a90dccc
-md"""FIXME: fun fact: there are coupling arguments in those papers."""
-
 # ╔═╡ 8d4f6147-758f-4056-9ce2-3baa1513ee9f
 md"## Probability of exact recovery and misclassification proportion"
-
-# ╔═╡ 3188c2b6-f08d-4df2-b2cc-8613cb30145b
-md"""FIXME
-- explain top-left plot
-- explain bottom-right plot :
-  - difficult when $p$ small
-  - exact recovery is way harder than misclassification proportion (especially when $n$ is large)
-"""
 
 # ╔═╡ 0d09518c-8e18-45b2-883d-2324c93e68f2
 md"### Plot parameters"
@@ -792,18 +647,6 @@ DOM.div(md"Ribbons' width is two standard deviations.",
 
 # ╔═╡ 7b101707-4364-4328-af54-3cea58698ab4
 md"## Outlooks"
-
-# ╔═╡ 0c1d8ea0-c116-4392-a0ba-7c11a563a036
-md"""FIXME
-- overview of my projects organized in the same boxes as before
-- Proba : Study strong approximations
-  - SPDE
-- Julia and the PP.jl
-- project with Sophie and Elodie
-- statistical models with unknown classes where you provide estimation and classification at the same time
-  - types of neurons
-  - types of users in social networks
-"""
 
 # ╔═╡ 200ae1c8-1521-4f35-98b3-6981d8b7a0d1
 html"</br>"
@@ -903,7 +746,7 @@ DOM.div(md"""
 md"## Estimation optimality"
 
 # ╔═╡ 8062da1a-5b93-4510-918b-dfc8ca767b93
-md"[Link to the upper-bound](FIXME)"
+md"[Link to the upper-bound](#Graph-density-estimation)"
 
 # ╔═╡ 28ac8b5f-06c3-4923-b142-24fd7cf8685b
 md"""
@@ -2304,50 +2147,17 @@ diffusionplots_text
 # ╔═╡ 432a611c-449f-493c-9d32-8cdff0c1854d
 verticalspace(height::Real) = @markdown("""<div style="height: $(string(height))px;"></div>""")
 
-# ╔═╡ ad84ab06-93ea-44d0-9248-4f6b2e204db6
-verticalspace(100)
-
-# ╔═╡ b8537acd-e5fc-4be9-87a9-c7eab4458ee4
-verticalspace(400)
-
 # ╔═╡ e1e2cc04-faf7-4726-8881-af3eaa5544e6
 verticalspace(50)
 
-# ╔═╡ a771033f-f5ec-43cb-bf6e-e74f372002fc
-verticalspace(300)
-
-# ╔═╡ a02c4d75-8729-4707-afc4-19d6ae0ae490
-verticalspace(200)
-
-# ╔═╡ 810ff3ca-8e10-460f-b7cd-0db6d9c806da
+# ╔═╡ 08aa991b-912d-4655-bf32-5a97a696da56
 verticalspace(100)
 
-# ╔═╡ f8a4a195-da6e-4b7f-a80a-3c5d5b9d6bd3
-verticalspace(200)
-
-# ╔═╡ c8a9699b-3662-4902-99b2-4099e51b7ec4
-verticalspace(200)
-
-# ╔═╡ be7baff4-a42a-4bb5-bdea-f12d8b00bbf2
+# ╔═╡ ae1efd66-9dd4-4fbd-8073-53f7f50010c7
 verticalspace(100)
 
-# ╔═╡ ebac01ae-d850-4d93-8499-d4814a84b769
-verticalspace(200)
-
-# ╔═╡ 73b77fa8-2e04-471b-97f3-9b0ddace2ffb
-verticalspace(100)
-
-# ╔═╡ 2f504d55-91e5-4381-a325-501126841472
-verticalspace(100)
-
-# ╔═╡ e02bd698-868c-40b0-9b4f-0e4ceab9b3aa
-verticalspace(200)
-
-# ╔═╡ a44b9496-d8b7-4a79-957b-a20f10e92ec3
-verticalspace(100)
-
-# ╔═╡ 4907be14-9aa6-42d5-a1c1-ccde39d5ac32
-verticalspace(100)
+# ╔═╡ 21619b0d-d9f3-4f96-bc3d-dc022ff79fbe
+verticalspace(50)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2381,9 +2191,9 @@ WGLMakie = "~0.13.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.7"
+julia_version = "1.12.2"
 manifest_format = "2.0"
-project_hash = "eeb3082c9b4f756706bce8a42dc48c84023fbdd2"
+project_hash = "1d4db197507ef159eab2d690b397896866e5a67c"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -2610,7 +2420,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.1+0"
+version = "1.3.0+1"
 
 [[deps.ComputePipeline]]
 deps = ["Observables", "Preferences"]
@@ -2727,7 +2537,7 @@ version = "0.9.5"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
+version = "1.7.0"
 
 [[deps.DrWatson]]
 deps = ["Dates", "FileIO", "JLD2", "LibGit2", "MacroTools", "Pkg", "Random", "Requires", "Scratch", "UnPack"]
@@ -3178,6 +2988,11 @@ git-tree-sha1 = "4255f0032eafd6451d707a51d5f0248b8a165e4d"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
 version = "3.1.3+0"
 
+[[deps.JuliaSyntaxHighlighting]]
+deps = ["StyledStrings"]
+uuid = "ac6e5ff7-fb65-4e79-a425-ec3bc9c03011"
+version = "1.12.0"
+
 [[deps.KernelDensity]]
 deps = ["Distributions", "DocStringExtensions", "FFTW", "Interpolations", "StatsBase"]
 git-tree-sha1 = "ba51324b894edaf1df3ab16e2cc6bc3280a2f1a7"
@@ -3247,24 +3062,24 @@ uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
 version = "0.6.4"
 
 [[deps.LibCURL_jll]]
-deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
+deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.6.0+0"
+version = "8.15.0+0"
 
 [[deps.LibGit2]]
-deps = ["Base64", "LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
+deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 version = "1.11.0"
 
 [[deps.LibGit2_jll]]
-deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll"]
+deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll"]
 uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
-version = "1.7.2+0"
+version = "1.9.0+0"
 
 [[deps.LibSSH2_jll]]
-deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
+deps = ["Artifacts", "Libdl", "OpenSSL_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.11.0+1"
+version = "1.11.3+1"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -3309,7 +3124,7 @@ version = "2.41.2+0"
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-version = "1.11.0"
+version = "1.12.0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
@@ -3365,7 +3180,7 @@ uuid = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
 version = "0.4.2"
 
 [[deps.Markdown]]
-deps = ["Base64"]
+deps = ["Base64", "JuliaSyntaxHighlighting", "StyledStrings"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 version = "1.11.0"
 
@@ -3388,7 +3203,8 @@ uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
 version = "1.1.9"
 
 [[deps.MbedTLS_jll]]
-deps = ["Artifacts", "Libdl"]
+deps = ["Artifacts", "JLLWrappers", "Libdl"]
+git-tree-sha1 = "926c6af3a037c68d02596a44c22ec3595f5f760b"
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
 version = "2.28.6+0"
 
@@ -3421,7 +3237,7 @@ version = "0.3.4"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2023.12.12"
+version = "2025.5.20"
 
 [[deps.MsgPack]]
 deps = ["Serialization"]
@@ -3449,7 +3265,7 @@ version = "1.1.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-version = "1.2.0"
+version = "1.3.0"
 
 [[deps.Observables]]
 git-tree-sha1 = "7438a59546cf62428fc9d1bc94729146d37a7225"
@@ -3480,7 +3296,7 @@ version = "0.3.29+0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.27+1"
+version = "0.3.29+0"
 
 [[deps.OpenEXR]]
 deps = ["Colors", "FileIO", "OpenEXR_jll"]
@@ -3497,7 +3313,7 @@ version = "3.2.4+0"
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.5+0"
+version = "0.8.7+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "NetworkOptions", "OpenSSL_jll", "Sockets"]
@@ -3506,8 +3322,7 @@ uuid = "4d8831e6-92b7-49fb-bdf8-b643e874388c"
 version = "1.6.0"
 
 [[deps.OpenSSL_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "f19301ae653233bc88b1810ae908194f07f8db9d"
+deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
 version = "3.5.4+0"
 
@@ -3531,7 +3346,7 @@ version = "1.8.1"
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-version = "10.42.0+1"
+version = "10.44.0+1"
 
 [[deps.PDMats]]
 deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse"]
@@ -3582,7 +3397,7 @@ version = "0.44.2+0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.11.0"
+version = "1.12.0"
 weakdeps = ["REPL"]
 
     [deps.Pkg.extensions]
@@ -3720,7 +3535,7 @@ version = "2.11.2"
     Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
 
 [[deps.REPL]]
-deps = ["InteractiveUtils", "Markdown", "Sockets", "StyledStrings", "Unicode"]
+deps = ["InteractiveUtils", "JuliaSyntaxHighlighting", "Markdown", "Sockets", "StyledStrings", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 version = "1.11.0"
 
@@ -3869,7 +3684,7 @@ version = "1.2.2"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-version = "1.11.0"
+version = "1.12.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
@@ -3974,7 +3789,7 @@ uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "7.7.0+0"
+version = "7.8.3+2"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -4270,7 +4085,7 @@ version = "1.6.0+0"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.13+1"
+version = "1.3.1+2"
 
 [[deps.Zstd_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -4311,7 +4126,7 @@ version = "0.17.4+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.11.0+0"
+version = "5.15.0+0"
 
 [[deps.libdecor_jll]]
 deps = ["Artifacts", "Dbus_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pango_jll", "Wayland_jll", "xkbcommon_jll"]
@@ -4370,7 +4185,7 @@ version = "1.1.7+0"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.59.0+0"
+version = "1.64.0+1"
 
 [[deps.oneTBB_jll]]
 deps = ["Artifacts", "JLLWrappers", "LazyArtifacts", "Libdl"]
@@ -4379,9 +4194,9 @@ uuid = "1317d2d5-d96f-522e-a858-c73665f53c3e"
 version = "2022.0.0+0"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "Libdl"]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+2"
+version = "17.7.0+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -4414,36 +4229,24 @@ version = "1.9.2+0"
 # ╟─34f58220-87c3-43d0-bca7-a7afbd6cd9c6
 # ╟─cbcef609-0781-4728-8a6a-937f82b67c1a
 # ╟─84e32427-cc6b-4b35-8a67-a243d8ec8add
-# ╠═ad84ab06-93ea-44d0-9248-4f6b2e204db6
-# ╠═dd29b1c5-6bd9-48c6-aaa8-de2e951c44ce
 # ╟─f04d0ada-3fd5-4441-8d07-67dec5da2504
 # ╟─9bdb9101-ec7d-4065-8a17-27e5676951de
-# ╠═b8537acd-e5fc-4be9-87a9-c7eab4458ee4
-# ╠═8a68c356-c1b7-492b-bdc7-b7ac2dd96a3a
 # ╟─0ca0d6a0-2bfd-4f29-aeff-a81b87e3be3b
 # ╟─bbbfcb51-81db-4b1d-8382-44c1658658aa
 # ╟─e1e2cc04-faf7-4726-8881-af3eaa5544e6
 # ╟─78de54a6-6f9a-4a5c-8121-48c9c2a80020
-# ╠═a771033f-f5ec-43cb-bf6e-e74f372002fc
-# ╠═5a5d3447-fbcc-42a1-92f1-f6bbb6825d3f
 # ╟─6007b1d3-17b0-47e8-ab83-6587a66d17e8
 # ╟─655cddf9-34f5-41c5-88b8-d095c3dbce5a
 # ╟─1dfc7065-05bc-4187-9677-52ecf9a33c1e
 # ╟─4e8e58b5-281f-42ab-b3d1-0725ebb5a34f
 # ╟─c49ac056-ab65-44ea-b37c-2e9d6426399e
 # ╟─68807259-fbb3-4c10-b7b4-5980a59c57e2
-# ╠═a02c4d75-8729-4707-afc4-19d6ae0ae490
-# ╠═58e967cc-6937-4941-953b-f79c822559c4
 # ╟─c448e7c4-34c9-43bf-9171-0f9a1915e8fb
 # ╟─dfcf884d-63cd-4e99-a81b-8338760fb5d5
 # ╟─357a9f03-912a-4ea0-9d0c-39ff734ebf01
-# ╠═810ff3ca-8e10-460f-b7cd-0db6d9c806da
-# ╠═7da9719f-2617-4eee-86fa-20dba7728dd2
 # ╟─a933cf6b-306f-4940-a4ca-bf493376c515
 # ╟─07f4c0df-0d77-4794-bbcd-9a9533c47283
 # ╟─661246fe-aea7-48c9-a49d-aed212b10a32
-# ╠═f8a4a195-da6e-4b7f-a80a-3c5d5b9d6bd3
-# ╠═3f5dba59-d773-45ac-b7e7-f555374a6340
 # ╟─9ff8a2e5-4e31-4971-bbd6-fc17d9f1b737
 # ╟─0915e18b-0f4b-4fdd-8ab2-ceb26a0eff7b
 # ╟─8d01edc8-71ee-4431-a68b-3a3745428176
@@ -4453,13 +4256,9 @@ version = "1.9.2+0"
 # ╟─40dc64c1-cdfc-49a2-aa79-63aea3e52b3c
 # ╟─dc8f4bd1-77ea-49c9-8dac-54f8f7064d48
 # ╟─07a7eb40-8b75-45c6-ac8d-79ccddcadaf0
-# ╠═c8a9699b-3662-4902-99b2-4099e51b7ec4
-# ╠═4394c62c-57bf-486a-af2d-cc9c16715e26
-# ╟─eeb75f07-3dbe-4b48-8498-e532f2418ed6
 # ╟─a3a74379-384e-4e04-9a69-dbaad58a7cd2
 # ╟─745ee1f2-edfd-4982-afef-f910379018bd
-# ╠═be7baff4-a42a-4bb5-bdea-f12d8b00bbf2
-# ╠═ee2d968a-a662-4da4-a17c-19839dffbfc2
+# ╟─08aa991b-912d-4655-bf32-5a97a696da56
 # ╟─e368d2ee-abe9-40cd-94b1-acaf9ef9482f
 # ╟─05f5212c-44a8-40c7-89b8-ad1abf863fc6
 # ╟─e0e76e79-a3cf-4fc8-841b-67a242da0542
@@ -4475,13 +4274,9 @@ version = "1.9.2+0"
 # ╟─5012cdc0-2399-4ee0-8819-14c75015d9a2
 # ╟─795b5f44-3cc6-4f21-96f4-0be0cf015fd9
 # ╟─bc594f49-72f5-43a9-a5c3-a8694c0b4b89
-# ╠═ebac01ae-d850-4d93-8499-d4814a84b769
-# ╠═7d3e5eac-cea0-47f7-840e-485dccc715ec
 # ╟─2435405c-8428-4af0-8d4e-4ae099cf3f13
 # ╟─fc24f7ef-d9c5-4c52-ae27-266850ce49a2
 # ╟─66932ace-17fd-4d11-a118-9056c448cd27
-# ╠═73b77fa8-2e04-471b-97f3-9b0ddace2ffb
-# ╠═e901002e-e3c7-4d38-be78-c59032d604b6
 # ╟─b7542278-c465-4096-921d-aee94dc3adbf
 # ╟─0e8bedd2-36e0-4acf-817e-b42a2fd97bbd
 # ╟─74bf35d1-801c-4e01-9705-51578a5a4318
@@ -4495,27 +4290,19 @@ version = "1.9.2+0"
 # ╟─51124312-b5e5-4324-92fa-cc00853ea2d6
 # ╟─469649cd-a6e5-4d69-8ada-20b566bd3cf1
 # ╟─7d445019-8982-4293-ae55-9dfa32a7d867
-# ╠═c60f7a22-703e-4cbe-95d8-09039d080d04
 # ╟─c562f965-72e2-4a7b-a649-53ac2d83908a
 # ╟─31f9380c-2888-4d75-b72b-a1bbbf7e3b06
 # ╟─2fc9ed70-0ee5-42ed-b45a-a6acd3e67e91
-# ╠═2f504d55-91e5-4381-a325-501126841472
-# ╠═2901a2cb-a2c8-48d9-873e-1a6213d29cad
 # ╟─00139eee-0abb-4409-8c96-cd44a6395d79
 # ╟─32e22997-52f9-46e5-8bdc-2b535953a3c6
 # ╟─d3f7f844-14fd-407d-8fd8-94f03afffc2b
-# ╠═e02bd698-868c-40b0-9b4f-0e4ceab9b3aa
-# ╠═f5f6c19c-b4d1-40b5-8598-fcc66a90dccc
 # ╟─8d4f6147-758f-4056-9ce2-3baa1513ee9f
 # ╟─65cb66cf-a7d4-45ef-a2e2-a33f12a2747a
-# ╠═a44b9496-d8b7-4a79-957b-a20f10e92ec3
-# ╠═3188c2b6-f08d-4df2-b2cc-8613cb30145b
+# ╟─ae1efd66-9dd4-4fbd-8073-53f7f50010c7
 # ╟─0d09518c-8e18-45b2-883d-2324c93e68f2
 # ╟─42248a46-895a-48e9-8fae-737eb8b63d1d
 # ╟─7b101707-4364-4328-af54-3cea58698ab4
 # ╟─d8e9c413-705a-419b-a3c2-9a2d69d6cfea
-# ╠═4907be14-9aa6-42d5-a1c1-ccde39d5ac32
-# ╟─0c1d8ea0-c116-4392-a0ba-7c11a563a036
 # ╟─200ae1c8-1521-4f35-98b3-6981d8b7a0d1
 # ╟─941709a1-2c58-4d29-b128-84212cee668b
 # ╟─dc010f7e-da5d-48e2-a33b-e8305db1cdc8
@@ -4530,6 +4317,7 @@ version = "1.9.2+0"
 # ╟─6273cbc1-ca15-43ad-bd66-a7d89232201b
 # ╟─d1328b2d-53a2-4052-8434-65db91077cc6
 # ╟─30ec7e37-701f-43ff-8cdc-2391863b014b
+# ╟─21619b0d-d9f3-4f96-bc3d-dc022ff79fbe
 # ╟─b3275370-4e8c-41fe-bd70-f6bc7eb04a5b
 # ╟─be991ec2-e0e5-40f5-8451-c8a1a850e605
 # ╟─e9826d8a-6ac5-4f94-b5e7-207b2d6b08f5
@@ -4552,7 +4340,7 @@ version = "1.9.2+0"
 # ╟─d7a03d41-86af-45fc-895d-b1753d5f2a35
 # ╟─dd3c0f63-8bf7-41d2-a958-a681894640ea
 # ╟─78a53f76-521f-4aaf-a798-d186239325f4
-# ╠═9a63b59b-1e1d-4b10-8aaa-dc83d7079ba8
+# ╟─9a63b59b-1e1d-4b10-8aaa-dc83d7079ba8
 # ╟─54827aa4-613e-44f4-9fee-1ffb24e72270
 # ╟─502a2174-437a-4f22-928e-25a6dea73f6b
 # ╟─3edc08a1-8da5-41ff-bb28-11c1641a2f0f
